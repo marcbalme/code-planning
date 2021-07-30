@@ -1,6 +1,8 @@
 const express = require('express');
 
 const mongoose = require('mongoose');
+const agencyRoutes = require('./routes/agency');
+
 const app = express();
 mongoose
   .connect('mongodb://localhost:27017/codedb', {
@@ -25,6 +27,7 @@ app.use((req: any, res: any, next: any) => {
 
 app.use(express.json());
 
+app.use('/api/agency', agencyRoutes);
 app.get('/', (req: any, res: any) => res.send('Express + TypeScript Server'));
 
 module.exports = app;
