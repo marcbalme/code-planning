@@ -1,7 +1,5 @@
-export {};
-
+import { AgencyType } from '../types';
 const Agency = require('../models/agency');
-const express = require('express');
 
 exports.createAgency = (req: any, res: any, next: any) => {
   const agency = new Agency({
@@ -25,7 +23,7 @@ exports.getOneAgency = (req: any, res: any, next: any) => {
   Agency.findOne({
     _id: req.params.id
   })
-    .then((agency: any) => {
+    .then((agency: AgencyType) => {
       res.status(200).json(agency);
     })
     .catch((error: any) => {
@@ -69,7 +67,7 @@ exports.updateAgency = (req: any, res: any, next: any) => {
 
 exports.getAllAgencies = (req: any, res: any, next: any) => {
   Agency.find()
-    .then((agencies: any) => {
+    .then((agencies: Array<AgencyType>) => {
       res.status(200).json(agencies);
     })
     .catch((error: any) => {
@@ -78,3 +76,5 @@ exports.getAllAgencies = (req: any, res: any, next: any) => {
       });
     });
 };
+
+export {};
