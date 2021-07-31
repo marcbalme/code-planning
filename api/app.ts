@@ -1,5 +1,7 @@
-const express = require('express');
+import { AGENCY_URL } from './constants';
+import setup from './translations/setup';
 
+const express = require('express');
 const mongoose = require('mongoose');
 const agencyRoutes = require('./routes/agency');
 
@@ -9,8 +11,8 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
-  .then(() => console.log('Connexion à MongoDB réussie !'))
-  .catch(() => console.log('Connexion à MongoDB échouée !'));
+  .then(() => console.log(setup.connexion_success))
+  .catch(() => console.log(setup.connexio_failed));
 
 app.use((req: any, res: any, next: any) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -27,7 +29,6 @@ app.use((req: any, res: any, next: any) => {
 
 app.use(express.json());
 
-app.use('/api/agency', agencyRoutes);
-app.get('/', (req: any, res: any) => res.send('Express + TypeScript Server'));
+app.use(AGENCY_URL, agencyRoutes);
 
 module.exports = app;

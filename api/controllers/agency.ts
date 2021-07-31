@@ -1,3 +1,4 @@
+import response from '../translations/response';
 import { AgencyType } from '../types';
 const Agency = require('../models/agency');
 
@@ -9,7 +10,7 @@ exports.createAgency = (req: any, res: any, next: any) => {
     .save()
     .then(() => {
       res.status(201).json({
-        message: 'agency saved successfully!'
+        message: response.agency.creation_success
       });
     })
     .catch((error: any) => {
@@ -37,7 +38,7 @@ exports.deleteAgency = (req: any, res: any, next: any) => {
   Agency.deleteOne({ _id: req.params.id })
     .then(() => {
       res.status(200).json({
-        message: 'Deleted!'
+        message: response.agency.deleted_success
       });
     })
     .catch((error: any) => {
@@ -55,7 +56,7 @@ exports.updateAgency = (req: any, res: any, next: any) => {
   Agency.updateOne({ _id: req.params.id }, agency)
     .then(() => {
       res.status(201).json({
-        message: 'Thing updated successfully!'
+        message: response.agency.update_success
       });
     })
     .catch((error: any) => {
